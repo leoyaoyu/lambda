@@ -109,8 +109,7 @@ if(p1.negate().and(p2).and(p3.or(p4)).test(input)){
 }
 ```
 
-[day4]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda
-/Day4_Predicate.java "Predicate interface"
+[day4]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day4_Predicate.java "Predicate interface"
 [day4完整例子][day4]
 
 ***
