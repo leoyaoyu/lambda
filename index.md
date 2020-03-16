@@ -9,6 +9,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day1 lambda简化代码](#day1)
 * [Day2 lambda提供函数的复用](#day2)
 * [Day3 lambda默认函数式接口](#day3)
+* [Day4 lambda默认接口Predicate](#day4)
 
 ---
 
@@ -81,5 +82,35 @@ Comparator<Integer> increase = (o1, o2) -> o1 - o2;
 
 [day3]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day3_Default_Lambda_Functional_Interface.java "default lambda interface"
 [day3完整例子][day3]
+
+***
+
+#### <a id="day4">Day4. lambda默认接口Predicate</a>
+
+Predicate接口用来做各种真假判断。函数式默认接口是test()方法。指定类型T的输入，返回都是boolean值。
+
+```
+	@FunctionalInterface
+	public interface Predicate<T> {
+	    boolean test(T t);
+	}
+```
+除了函数式接口test()之外，还提供了几个default实现，用来组合Predicate做并、交和否的操作。
+
+* 例子：判断字符串不为空、并且等于我们指定的两个中的一个：
+
+```
+Predicate<String> p1 = (str) -> str == null;
+Predicate<String> p2 = (str) -> !str.isEmpty();
+Predicate<String> p3 = (str) -> str.equals(SERVICE_NAME1);
+Predicate<String> p4 = (str) -> str.equals(SERVICE_NAME2);
+if(p1.negate().and(p2).and(p3.or(p4)).test(input)){
+	...
+}
+```
+
+[day4]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda
+/Day4_Predicate.java "Predicate interface"
+[day4完整例子][day4]
 
 ***
