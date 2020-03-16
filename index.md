@@ -90,10 +90,10 @@ Comparator<Integer> increase = (o1, o2) -> o1 - o2;
 Predicate接口用来做各种真假判断。函数式默认接口是test()方法。指定类型T的输入，返回都是boolean值。
 
 ```
-	@FunctionalInterface
-	public interface Predicate<T> {
-	    boolean test(T t);
-	}
+@FunctionalInterface
+public interface Predicate<T> {
+    boolean test(T t);
+}
 ```
 除了函数式接口test()之外，还提供了几个default实现，用来组合Predicate做并、交和否的操作。
 
