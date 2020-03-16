@@ -1,12 +1,12 @@
 ## Lambda 技术专题学习
 
-Lambda是从Java8引入的重要的特性。基于Lambda，整个开发的编程风格、带可读性、设计思想都受到极大的冲击。学好Lambda是一个现代JAVA攻城狮的必备技能。
+Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法级别的复用性。基于Lambda，整个开发的编程风格、带可读性、设计思想都受到极大的冲击。学好Lambda是一个现代JAVA攻城狮的必备技能。
 
 ## 目录
 
-* [Day1 lambda的产生](#day1)
-* [Day2 函数复用](#day2)
-* [Day3 默认函数式接口](#day3)
+* [Day1 lambda简化代码](#day1)
+* [Day2 lambda提供函数的复用](#day2)
+* [Day3 lambda默认函数式接口](#day3)
 
 ---
 
@@ -14,10 +14,11 @@ Lambda是从Java8引入的重要的特性。基于Lambda，整个开发的编程
 
 本专题的学习以小知识点为主，每篇内容尽量控制在3分钟之内。
 
-#### <a id="day1">Day1. 有Lambda之前，我们使用内部类实现方法的复用</a>
+#### <a id="day1">Day1. lambda提高代码可读性</a>
 
-函数式提供方法级别的复用。
-没有函数式之前，要让方法可以复用，需要使用内部类；
+JAVA8推出lambda之后极大的提高了代码的可读性。有Lambda之前，我们使用内部类实现方法的复用
+
+lambda之前：
 ```
 Calculate addition0 = new Calculate() {
   @Override
@@ -27,7 +28,7 @@ Calculate addition0 = new Calculate() {
 };
 ```
 
-有函数式之后，方法的复用变得简洁了；
+lambda之后：
 
 ```
 Calculate addition = (x, y) -> x + y;
@@ -38,7 +39,7 @@ Calculate addition = (x, y) -> x + y;
 
 ***
 
-#### <a id="day2">Day2. JAVA中方法重用的例子</a>
+#### <a id="day2">Day2. lambda提供函数的复用</a>
 
 平时开发中需要重用方法吗？我们平时开发中常用的策略模式首当其中得益于lambda表达式，如：Comparator、Runnable。
 
@@ -66,7 +67,7 @@ Comparator<Integer> increase = (o1, o2) -> o1 - o2;
 
 ***
 
-#### <a id="day3">Day3. JAVA8默认提供的函数式接口</a>
+#### <a id="day3">Day3. lambda默认函数式接口</a>
 
 如果你经常定义自己的函数式接口，你很容易发现这些常用的接口有几个固定的模式。可能有输入没输出。可能没输入有输出。也可能既有输入也有输出。JDK8中总结了大家常用的使用方式形成函数式接口，并把这些接口广泛用于类库的开发中。
 
