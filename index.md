@@ -6,9 +6,11 @@ Lambda是从Java8引入的重要的特性。基于Lambda，整个开发的编程
 
 本专题的学习以小知识点为主，每篇内容尽量控制在3分钟之内。
 
-[Day1.有Lambda之前，我们使用内部类实现方法的复用](https://github
-.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day1_basic.java)
-[Day2.JAVA中方法重用的例子](https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda
-/Day2_compare.java)
-[Day3.JAVA8默认提供的函数式接口](https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda
-/Day3_Default_Lambda_Functional_Interface.java)
+[day1]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day1_basic.java "basic"
+##### [Day1.有Lambda之前，我们使用内部类实现方法的复用][day1]
+
+##### [day2]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day2_compare.java "compare"
+[Day2.JAVA中方法重用的例子][day2]
+
+##### [day3]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day3_Default_Lambda_Functional_Interface.java "default lambda interface"
+[Day3.JAVA8默认提供的函数式接口][day3]
