@@ -4,7 +4,7 @@ Lambda是从Java8引入的重要的特性。基于Lambda，整个开发的编程
 
 本专题的学习以小知识点为主，每篇内容尽量控制在3分钟之内。
 
-### 内容
+### 开始lambda学习之旅
 
 #### Day1. 有Lambda之前，我们使用内部类实现方法的复用
 
@@ -26,7 +26,7 @@ Calculate addition = (x, y) -> x + y;
 ```
 
 [day1]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day1_basic.java "basic"
-[完整例子][day1]
+[day1完整例子][day1]
 
 ***
 
@@ -54,7 +54,7 @@ Comparator<Integer> increase = (o1, o2) -> o1 - o2;
 ```
 
 [day2]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day2_compare.java "compare"
-[完整例子][day2]
+[day2完整例子][day2]
 
 ***
 
@@ -69,6 +69,6 @@ Comparator<Integer> increase = (o1, o2) -> o1 - o2;
 这样的2个接口在函数式中可以用Supplier<T>来表示。以上只是列举了一元的几个，后面会一个一个介绍。并引入二元、和柯里化等概念。
 
 [day3]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day3_Default_Lambda_Functional_Interface.java "default lambda interface"
-[完整例子][day3]
+[day3完整例子][day3]
 
 ***
