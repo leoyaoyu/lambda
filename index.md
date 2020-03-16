@@ -73,9 +73,9 @@ Comparator<Integer> increase = (o1, o2) -> o1 - o2;
 
 如果你经常定义自己的函数式接口，你很容易发现这些常用的接口有几个固定的模式。可能有输入没输出。可能没输入有输出。也可能既有输入也有输出。JDK8中总结了大家常用的使用方式形成函数式接口，并把这些接口广泛用于类库的开发中。
 
-	比如：
-		○ java.lang.Cloneable提供接口： E clone();
-		○ java.util.Iterator提供接口：Iterator<E> iterator()
+    比如：
+	java.lang.Cloneable提供接口： E clone();
+	java.util.Iterator提供接口：Iterator<E> iterator()
 
 这样的2个接口在函数式中可以用Supplier<T>来表示。以上只是列举了一元的几个，后面会一个一个介绍。并引入二元、和柯里化等概念。
 
