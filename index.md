@@ -4,7 +4,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 
 ---
 
-## Lambda技术专题目录
+## Lambda专题目录
 
 * [Day1 lambda简化代码](#day1)
 * [Day2 lambda提供函数的复用](#day2)
