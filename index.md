@@ -10,6 +10,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day2 开发中需要重用方法吗？](#day2)
 * [Day3 默认的函数式接口](#day3)
 * [Day4 lambda默认接口Predicate](#day4)
+* [Day5 lambda默认接口Function](#day5)
 
 ---
 
@@ -114,5 +115,26 @@ if(p1.negate().and(p2).and(p3.or(p4)).test(input)){
 
 [day4]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day4_Predicate.java "Predicate interface"
 [day4完整例子][day4]
+
+***
+
+#### <a id="day5">Day5. lambda默认接口Function</a>
+Function<T,R> 提供一个方法，其输入是T类型，输出是R类型。具体接口定义如下：
+```
+@FunctionalInterface
+public interface Function<T, R> {
+    R apply(T t);
+}
+```
+除了基本的接口定义，还提供了两个default方法compose和andThen。快速的理解一下这两个方法。假设有两个函数f(x)和g(x)。
+* compose: f.compose(g).apply(x)的意思是x作为输入，先执行g(x)，然后再把g(x)的结果作为输入执行 f(x)函数；
+* andThen: f.andThen(g).apply(x)的意思是x作为输入，先执行f(x)，然后再把f(x)的结果作为输入执行 g(x)函数；
+
+因此g.compose(f)等价于f.andThen(g)。这两个方法很实用，可以把一连串的Function方法串起来使用。
+
+
+[day5]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day5_Function.java 
+"Function interface"
+[day5完整例子][day5]
 
 ***
