@@ -8,7 +8,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 
 * [Day1 初亏lambda表达式](#day1)
 * [Day2 开发中需要重用方法吗？](#day2)
-* [Day3 lambda默认函数式接口](#day3)
+* [Day3 默认的函数式接口](#day3)
 * [Day4 lambda默认接口Predicate](#day4)
 
 ---
@@ -72,7 +72,7 @@ Comparator<Integer> increase = (o1, o2) -> o1 - o2;
 
 ***
 
-#### <a id="day3">Day3. lambda默认函数式接口</a>
+#### <a id="day3">Day3. 默认的函数式接口</a>
 
 如果你经常定义自己的函数式接口，你很容易发现这些常用的接口有几个固定的模式。可能有输入没输出。可能没输入有输出。也可能既有输入也有输出。JDK8中总结了大家常用的使用方式形成函数式接口，并把这些接口广泛用于类库的开发中。
 
