@@ -119,13 +119,20 @@ if(p1.negate().and(p2).and(p3.or(p4)).test(input)){
 ***
 
 #### <a id="day5">Day5. lambda默认接口Function</a>
-Function<T,R> 提供一个方法，其输入是T类型，输出是R类型。具体接口定义如下：
+Function<T,R> 提供一个apply方法，其输入是T类型，输出是R类型。具体接口定义如下：
 ```
 @FunctionalInterface
 public interface Function<T, R> {
     R apply(T t);
 }
 ```
+例子：
+```
+Function<Integer, String> threadName = (x) -> "Thread_" + x;
+String result = threadName.apply(6);
+```
+定义了一个函数，输入Integer类型的数字(如:6)，输出是一个字符串(Thread_6)。
+
 除了基本的接口定义，还提供了两个default方法compose和andThen。快速的理解一下这两个方法。假设有两个函数f(x)和g(x)。
 * compose: f.compose(g).apply(x)的意思是x作为输入，先执行g(x)，然后再把g(x)的结果作为输入执行 f(x)函数；
 * andThen: f.andThen(g).apply(x)的意思是x作为输入，先执行f(x)，然后再把f(x)的结果作为输入执行 g(x)函数；
