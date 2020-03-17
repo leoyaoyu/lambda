@@ -6,8 +6,8 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 
 ## Lambda专题目录
 
-* [Day1 lambda简化代码](#day1)
-* [Day2 lambda提供函数的复用](#day2)
+* [Day1 初亏lambda表达式](#day1)
+* [Day2 开发中需要重用方法吗？](#day2)
 * [Day3 lambda默认函数式接口](#day3)
 * [Day4 lambda默认接口Predicate](#day4)
 
@@ -17,11 +17,18 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 
 本专题的学习以小知识点为主，每篇内容尽量控制在3分钟之内。争取利用零碎时间片段看过就学会。作者也建议您详细阅读完整代码，或者自己动手实践每个知识点。
 
-#### <a id="day1">Day1. lambda提高代码可读性</a>
+#### <a id="day1">Day1. 初亏lambda表达式</a>
 
-JAVA8推出lambda之后极大的提高了代码的可读性。有Lambda之前，我们使用内部类实现方法的复用
+漫天都是lambda表达式，它长啥样呢？来看一个lambda表达式的例子：
+```
+Calculate addition = (x, y) -> x + y;
+```
 
-lambda之前：
+自从JAVA8推出lambda之后很多Java代码都编程这个风格的了，这看起来好像不是很好理解。简单解释一下其中的意思：x、y是输入参数。箭头后面的部分是计算方法。addition是可被重用的方法的名字。具体使用的时候传入x、y
+的值即可:，如：addition.algorithm(3,6)，可以获得答案9。
+
+
+有Lambda之前，这种方法的复用是怎么实现的呢？lambda之前方法复用的实现方式是：内部类。我们实现一个和上面lambda表达式一样的内部类，代码如下：
 ```
 Calculate addition0 = new Calculate() {
   @Override
@@ -31,24 +38,19 @@ Calculate addition0 = new Calculate() {
 };
 ```
 
-lambda之后：
-
-```
-Calculate addition = (x, y) -> x + y;
-```
 
 [day1]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day1_basic.java "basic"
 [day1完整例子][day1]
 
 ***
 
-#### <a id="day2">Day2. lambda提供函数的复用</a>
+#### <a id="day2">Day2. 开发中需要重用方法吗？</a>
 
-平时开发中需要重用方法吗？我们平时开发中常用的策略模式首当其中得益于lambda表达式，如：Comparator、Runnable。
+平时开发中需要重用方法吗？由于JAVA之前的开发中要复用方法的实现很不方便，所以从开发习惯上大家用得不是很多。但是在弱类型的JS中方法重用是家常便饭。对于JAVA
+来讲，也有不少需要类库层面就鼓励我们方法重用的例子。如：Comparator
+、Runnable（它们都是策略模式，策略模式最直观的可以用上lambda，建议大家在自己的开发中遇到策略模式直接选用lambda实现）。
 
-以Comparator为例：我们时长需要为列表排序，排序的策略需要指定不同的Comparator。
-
-lambda之前：
+以Comparator为例：我们时长需要为列表排序，排序的策略需要指定不同的Comparator。有lambda之前，大家往往会这么实现：
 
 ```
 Comparator<Integer> increase = new Comparator<Integer>() {
@@ -60,7 +62,7 @@ Comparator<Integer> increase = new Comparator<Integer>() {
 
 ```
 
-lambda之后：
+lambda之后，代码变得更简单清晰了：
 ```
 Comparator<Integer> increase = (o1, o2) -> o1 - o2;
 ```
