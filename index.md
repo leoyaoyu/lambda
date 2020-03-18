@@ -134,6 +134,7 @@ String result = threadName.apply(6);
 ```
 定义了一个函数，输入Integer类型的数字(如:6)，输出是一个字符串(Thread_6)。
 
+###### [Default method]
 除了基本的接口定义，还提供了两个default方法compose和andThen。快速的理解一下这两个方法。假设有两个函数f(x)和g(x)。
 * compose: f.compose(g).apply(x)的意思是x作为输入，先执行g(x)，然后再把g(x)的结果作为输入执行 f(x)函数；
 * andThen: f.andThen(g).apply(x)的意思是x作为输入，先执行f(x)，然后再把f(x)的结果作为输入执行 g(x)函数；
@@ -168,6 +169,7 @@ exceptionLog.accept(ex);
 ```
 exceptionLog定义了一个把exception的message打印出来的函数，输入是一个Exception，并不需要输出任何值。
 
+###### [Default method]
 除了基本的接口定义，还提供了1个default方法andThen。andThen方法可以让两个consumer共享同一个输入。
 
 例如上面的例子中我们需要把Exception的message信息打印到Warning
@@ -189,7 +191,7 @@ Consumer<Exception> detailedExceptionLog = (ex1) ->{
 Consumer<Exception> exceptionLog = (ex2) -> log.warn("User found exception: {}", ex2.getMessage());
 
 //output both kinds of logs
-detailedExceptionLog.andThen(exceptionLog).accept(ex);
+exceptionLog.andThen(detailedExceptionLog).accept(ex);
 ```
 
 [day6]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day6_Consumer.java 

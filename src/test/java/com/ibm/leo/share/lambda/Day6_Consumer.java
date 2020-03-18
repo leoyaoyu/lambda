@@ -25,6 +25,6 @@ public class Day6_Consumer {
         Consumer<Exception> exceptionLog = (ex2) -> log.warn("User found exception: {}", ex2.getMessage());
 
         //output both kinds of logs
-        detailedExceptionLog.andThen(exceptionLog).accept(ex);
+        exceptionLog.andThen(detailedExceptionLog).accept(ex);
     }
 }
