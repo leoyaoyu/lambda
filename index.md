@@ -11,6 +11,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day3 默认的函数式接口](#day3)
 * [Day4 lambda默认接口Predicate](#day4)
 * [Day5 lambda默认接口Function](#day5)
+* [Day6 lambda默认接口Consumer](#day6)
 
 ---
 
@@ -148,5 +149,51 @@ String result = threadName.apply(6);
 [day5]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day5_Function.java 
 "Function interface"
 [day5完整例子][day5]
+
+***
+
+#### <a id="day6">Day6. lambda默认接口Consumer</a>
+Consumer<T> 提供一个accept方法，它仅消费一个T类型的入参，并不输出任何值。具体接口定义如下：
+```
+@FunctionalInterface
+public interface Consumer<T> {
+    void accept(T t);
+}
+```
+例子：
+```
+Exception ex = new NullPointerException("can not find the user with id AD34CVER3");
+Consumer<Exception> exceptionLog = (ex2) -> log.warn("User found exception: {}", ex2.getMessage());
+exceptionLog.accept(ex);
+```
+exceptionLog定义了一个把exception的message打印出来的函数，输入是一个Exception，并不需要输出任何值。
+
+除了基本的接口定义，还提供了1个default方法andThen。andThen方法可以让两个consumer共享同一个输入。
+
+例如上面的例子中我们需要把Exception的message信息打印到Warning
+的日志中。如果在debug level的日志输出，我们希望把更细节的exception的trace也全部打印到log日志中。两种打印方法使用的都是同一个Exception作为输入。这个时候即可用andThen
+方法把两个函数串起来使用，代码如下所示：
+
+```
+Exception ex = new NullPointerException("can not find the user with id AD34CVER3");
+
+//output detailed log stack trace in debug log;
+Consumer<Exception> detailedExceptionLog = (ex1) ->{
+    StackTraceElement[] elements = ex1.getStackTrace();
+    Stream.of(elements).forEach(trace ->
+        log.debug("User found exception: {}", trace)
+    );
+};
+
+//only output exception message in warning log;
+Consumer<Exception> exceptionLog = (ex2) -> log.warn("User found exception: {}", ex2.getMessage());
+
+//output both kinds of logs
+detailedExceptionLog.andThen(exceptionLog).accept(ex);
+```
+
+[day6]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day6_Consumer.java 
+"Function interface"
+[day6完整例子][day6]
 
 ***
