@@ -137,8 +137,11 @@ String result = threadName.apply(6);
 * compose: f.compose(g).apply(x)的意思是x作为输入，先执行g(x)，然后再把g(x)的结果作为输入执行 f(x)函数；
 * andThen: f.andThen(g).apply(x)的意思是x作为输入，先执行f(x)，然后再把f(x)的结果作为输入执行 g(x)函数；
 
-因此g.compose(f)等价于f.andThen(g)。这两个方法很实用，可以把Function方法串起来使用实现函数的高阶运算。
-例如当我们需要计算(x+6)^2时，可以用两个函数来实现：f(x) = x+6; g(x) = x*x; (x+6)^2 = g(f(x)); 
+因此g.compose(f)等价于f.andThen(g)。
+
+这两个方法很实用，可以把Function方法串起来使用实现函数的高阶运算。
+
+例如: 当我们需要计算(x+6)^2时，可以用两个函数来实现：f(x) = x+6; g(x) = x*x; (x+6)^2 = g(f(x)); 
 使用Function的这两个方法就是：g.compose(f).apply(x)或者f.andThen(g).apply(x)。
 
 
