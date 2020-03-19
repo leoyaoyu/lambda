@@ -201,3 +201,33 @@ exceptionLog.andThen(detailedExceptionLog).accept(ex);
 [day6完整例子][day6]
 
 ***
+
+#### <a id="day7">Day7. lambda默认接口Supplier</a>
+Supplier<T> 提供一个get方法，无输入生产一个T类型的输出。具体接口定义如下：
+```
+@FunctionalInterface
+public interface Supplier<T> {
+    T get();
+}
+
+```
+Supplier主要是用于提供数据。它时常用于懒加载。既在需要数据的时候才去生成相应的数据，已节约初始化时候的资源或者降低时间开销。在没有Supplier之前我们常采用Proxy代理模式的方式去懒加载一个资源。但是有了Supplier
+之后资源的懒加载变得更简单，与代理模式相比，代码可读性也变强很多。例子：
+
+```
+Supplier<Double> doubleSupplier = () ->
+       IntStream.range(1,3) //(1,50000)
+              .boxed()
+              .map(i -> Double.valueOf(i*i))
+              .peek(i -> log.info(i.toString()))
+              .reduce((acc, item) ->  acc + item)
+              .get();
+log.info("calculated result is : {}", doubleSupplier.get());
+```
+代码中Stream的部分不必看懂，可以简单理解为使用数值的map/reduce计算模拟了一个复杂计算。实际的计算可能比这个复杂N倍。但我们只在真的需要这个计算结果的时候才去调用supplier方法以获得结果。
+
+[day7]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day7_Supplier.java 
+"Suppiler interface"
+[day7完整例子][day7]
+
+***
