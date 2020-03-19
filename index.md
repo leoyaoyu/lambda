@@ -164,7 +164,8 @@ public interface Consumer<T> {
 例子：
 ```
 Exception ex = new NullPointerException("can not find the user with id AD34CVER3");
-Consumer<Exception> exceptionLog = (ex2) -> log.warn("User found exception: {}", ex2.getMessage());
+Consumer<Exception> exceptionLog = (ex2) -> 
+    log.warn("User found exception: {}", ex2.getMessage());
 exceptionLog.accept(ex);
 ```
 exceptionLog定义了一个把exception的message打印出来的函数，输入是一个Exception，并不需要输出任何值。
@@ -188,7 +189,8 @@ Consumer<Exception> detailedExceptionLog = (ex1) ->{
 };
 
 //only output exception message in warning log;
-Consumer<Exception> exceptionLog = (ex2) -> log.warn("User found exception: {}", ex2.getMessage());
+Consumer<Exception> exceptionLog = (ex2) -> 
+    log.warn("User found exception: {}", ex2.getMessage());
 
 //output both kinds of logs
 exceptionLog.andThen(detailedExceptionLog).accept(ex);
