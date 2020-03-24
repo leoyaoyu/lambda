@@ -13,6 +13,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day5 lambda默认接口Function](#day5)
 * [Day6 lambda默认接口Consumer](#day6)
 * [Day7 lambda默认接口Supplier](#day7)
+* [Day8 lambda默认接口UnaryOperator](#day8)
 
 ---
 
@@ -232,3 +233,27 @@ log.info("calculated result is : {}", doubleSupplier.get());
 [day7完整例子][day7]
 
 ***
+
+#### <a id="day8">Day8. lambda默认接口UnaryOperator</a>
+UnaryOperator<T>其实是一个Function<T,R>接口的简化版本。Function输入是T类型，输出是R类型。而UnaryOperator输入输出都是同一个类型。具体接口定义如下：
+```
+@FunctionalInterface
+public interface UnaryOperator<T> extends Function<T, T> {
+    static <T> UnaryOperator<T> identity() {
+        return t -> t;
+    }
+}
+
+```
+简化的例子：
+```
+Function<Integer, String> threadName1 = (str) -> "Thread_" + str;
+UnaryOperator<String> threadName2 = (str) -> "Thread_" + str;
+```
+threadName1与threadName2实现的是同样的功能，threadName2比threadName1更简单一些。
+
+*UnaryOperator和Function都有一个static identity方法，暂时不用细扣，这个会留到后面做介绍。static会在自定义函数式接口中做介绍，identity方法会留到Stream收集器中做介绍。
+
+[day8]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day8_UnaryOperator.java 
+"UnaryOperator interface"
+[day8完整例子][day8]
