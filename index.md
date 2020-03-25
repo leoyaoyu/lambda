@@ -15,7 +15,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day7 lambda默认接口Supplier](#day7)
 * [Day8 lambda默认接口UnaryOperator](#day8)
 * [Day9 lambda默认接口BiFunction](#day9)
-* [Day10 lambda默认接口BinaryOperator](day10)
+* [Day10 lambda默认接口BinaryOperator](#day10)
 
 ---
 
@@ -305,8 +305,8 @@ cycle.andThen(area).apply(4.0);
 ***
 
 #### <a id="day10">Day10. lambda默认接口BinaryOperator</a>
-BinaryOperator<T>是[BiFunction<T, U, V>函数](day9)的简化版本，这与[UnaryOperator<T>](day8)是[Function<T,
-R>接口](day7)的简化版本类似[参考day8](day8)。BinaryOperator的所有输入输出都是同一个类型。具体接口定义如下：
+BinaryOperator<T>是[BiFunction<T, U, V>函数](#day9)的简化版本，这与[UnaryOperator<T>](#day8)是[Function<T,
+R>接口](#day7)的简化版本类似[参考day8](#day8)。BinaryOperator的所有输入输出都是同一个类型。具体接口定义如下：
 ```
 @FunctionalInterface
 public interface BinaryOperator<T> extends BiFunction<T,T,T> {
@@ -315,8 +315,7 @@ public interface BinaryOperator<T> extends BiFunction<T,T,T> {
 ```
 一个实现二元运算的例子：
 ```
-private Integer calculation(Integer x, Integer y,
-                            BinaryOperator<Integer> operation) {
+private Integer calculation(Integer x, Integer y, BinaryOperator<Integer> operation) {
     return operation.apply(x, y);
 }
 int a =8, b =9;
