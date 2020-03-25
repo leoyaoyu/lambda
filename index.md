@@ -278,12 +278,13 @@ rectangle.apply(4.0, 5.0) //20.0
 ###### [Default method]
 除了基本的接口定义，还提供了1个default方法andThen。andThen的用法和[Function接口的类似](#Day5)，但是要注意的是andThen的串联上的是一个Function函数而不是BiFunction。
 ```
-default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
+default <V> BiFunction<T, U, V> 
+            andThen(Function<? super R, ? extends V> after) {
     Objects.requireNonNull(after);
     return (T t, U u) -> after.apply(apply(t, u));
 }
 ```
-我们可以使用andThen来实现几种规则平面的面积计算，例子如下：
+我们可以使用andThen来实现几种规则平面的面积计算，例子如下。注意后三行，可读性是不是稍微有一些提升。
 ```
 Function<Double, String> area = (x) -> "area is " + x;
 BiFunction<Double, Double, Double> rectangle = (x, y) -> x * y;
@@ -295,10 +296,6 @@ triangle.andThen(area).apply(4.0, 5.0);
 cycle.andThen(area).apply(4.0);
 
 ```
-再次我们使用函数式的名字就可以增加代码的可读性，注意后三行在使用的时候可以读出：
-* rectangle的area是多少？
-* triangle的area是多少？
-* cycle的area是多少？
 
 [day9]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day9_BiFunction.java 
 "Function interface"
