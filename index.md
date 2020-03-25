@@ -15,6 +15,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day7 lambda默认接口Supplier](#day7)
 * [Day8 lambda默认接口UnaryOperator](#day8)
 * [Day9 lambda默认接口BiFunction](#day9)
+* [Day10 lambda默认接口BinaryOperator](day10)
 
 ---
 
@@ -303,3 +304,40 @@ cycle.andThen(area).apply(4.0);
 
 ***
 
+#### <a id="day10">Day10. lambda默认接口BinaryOperator</a>
+BinaryOperator<T>是[BiFunction<T, U, V>函数](day9)的简化版本，这与[UnaryOperator<T>](day8)是[Function<T,
+R>接口](day7)的简化版本类似[参考day8](day8)。BinaryOperator的所有输入输出都是同一个类型。具体接口定义如下：
+```
+@FunctionalInterface
+public interface BinaryOperator<T> extends BiFunction<T,T,T> {
+    ...
+}
+```
+一个实现二元运算的例子：
+```
+private Integer calculation(Integer x, Integer y,
+                            BinaryOperator<Integer> operation) {
+    return operation.apply(x, y);
+}
+int a =8, b =9;
+log.info("plus: "+ calculation(a,b, (x, y) -> x + y).toString());
+log.info("minus: "+ calculation(a,b, (x, y) -> x - y).toString());
+log.info("multiple: "+ calculation(a,b, (x, y) -> x * y).toString());
+log.info("divide: "+ calculation(a,b, (x, y) -> x / y).toString());
+log.info("reminder: "+ calculation(a,b, (x, y) -> x % y).toString());
+```
+
+###### [Default method]
+BinaryOperator提供两个default方法：minBy/maxBy，接收一个Comparator来对输入的两个值排序，例子：
+```
+Comparator<Integer> comparator = (x, y) -> y - x;
+BinaryOperator<Integer> max = BinaryOperator.maxBy(comparator);
+BinaryOperator<Integer> min = BinaryOperator.minBy(comparator);
+log.info("BinaryOperator max:"+ max.apply(a,b).toString());
+log.info("BinaryOperator min:"+ min.apply(a,b).toString());
+```
+上面的例子按照从大到小的顺序排列，所以maxBy反而输出的是小的值，minBy输出的是大值。这两个default方法在后面Stream中做元素的提取时能起到很大的作用。
+
+[day10]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day10_BinaryOperator.java 
+"UnaryOperator interface"
+[day10完整例子][day10]

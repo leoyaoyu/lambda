@@ -18,9 +18,7 @@ public class Day10_BinaryOperator {
 
     @Test
     public void test(){
-        int a =8;
-        int b =9;
-
+        int a =8, b =9;
         log.info("plus: "+ calculation(a,b, (x, y) -> x + y).toString());
         log.info("minus: "+ calculation(a,b, (x, y) -> x - y).toString());
         log.info("multiple: "+ calculation(a,b, (x, y) -> x * y).toString());
