@@ -9,7 +9,7 @@ import java.util.function.BinaryOperator;
 import java.util.stream.Stream;
 
 @Slf4j
-public class Day9_BinaryOperator {
+public class Day10_BinaryOperator {
 
     private Integer calculation(Integer x, Integer y,
                                 BinaryOperator<Integer> operation) {

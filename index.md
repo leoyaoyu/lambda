@@ -14,6 +14,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day6 lambda默认接口Consumer](#day6)
 * [Day7 lambda默认接口Supplier](#day7)
 * [Day8 lambda默认接口UnaryOperator](#day8)
+* [Day9 lambda默认接口BiFunction](#day9)
 
 ---
 
@@ -243,7 +244,6 @@ public interface UnaryOperator<T> extends Function<T, T> {
         return t -> t;
     }
 }
-
 ```
 简化的例子：
 ```
@@ -257,3 +257,52 @@ threadName1与threadName2实现的是同样的功能，threadName2比threadName1
 [day8]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day8_UnaryOperator.java 
 "UnaryOperator interface"
 [day8完整例子][day8]
+
+***
+
+#### <a id="day9">Day9. lambda默认接口BiFunction</a>
+有了Function一个输入一个输出，如果有两个输入怎么办？JDK8提供了另一个函数式接口BiFunction<T, U, R> 提供一个apply方法，其输入是T和U类型，输出是R类型。具体接口定义如下：
+```
+@FunctionalInterface
+public interface BiFunction<T, U, R> {
+    R apply(T t, U u);
+}
+```
+例子：
+```
+BiFunction<Double, Double, Double> rectangle = (x, y) -> x * y;
+rectangle.apply(4.0, 5.0) //20.0
+```
+定义了一个函数rectangle来计算长方形的面积，输入长方形的长宽(如:4.0, 5.0)，调用apply之后输出它的面积(20.0)。
+
+###### [Default method]
+除了基本的接口定义，还提供了1个default方法andThen。andThen的用法和[Function接口的类似](#Day5)，但是要注意的是andThen的串联上的是一个Function函数而不是BiFunction。
+```
+default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
+    Objects.requireNonNull(after);
+    return (T t, U u) -> after.apply(apply(t, u));
+}
+```
+我们可以使用andThen来实现几种规则平面的面积计算，例子如下：
+```
+Function<Double, String> area = (x) -> "area is " + x;
+BiFunction<Double, Double, Double> rectangle = (x, y) -> x * y;
+BiFunction<Double, Double, Double> triangle = (a, h) -> a * h / 2;
+Function<Double, Double> cycle = (r) -> r * 3.14159265354;
+
+rectangle.andThen(area).apply(4.0, 5.0);
+triangle.andThen(area).apply(4.0, 5.0);
+cycle.andThen(area).apply(4.0);
+
+```
+再次我们使用函数式的名字就可以增加代码的可读性，注意后三行在使用的时候可以读出：
+* rectangle的area是多少？
+* triangle的area是多少？
+* cycle的area是多少？
+
+[day9]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day9_BiFunction.java 
+"Function interface"
+[day9完整例子][day9]
+
+***
+
