@@ -284,7 +284,7 @@ default <V> BiFunction<T, U, V>
     return (T t, U u) -> after.apply(apply(t, u));
 }
 ```
-我们可以使用andThen来实现几种规则平面的面积计算，例子如下。注意后三行，可读性是不是稍微有一些提升。
+我们可以使用andThen来实现几种规则平面的面积计算，例子如下。
 ```
 Function<Double, String> area = (x) -> "area is " + x;
 BiFunction<Double, Double, Double> rectangle = (x, y) -> x * y;
