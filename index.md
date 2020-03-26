@@ -305,8 +305,8 @@ cycle.andThen(area).apply(4.0);
 ***
 
 #### <a id="day10">Day10. lambda默认接口BinaryOperator</a>
-BinaryOperator<T>是[BiFunction<T, U, V>函数](#day9)的简化版本，这与[UnaryOperator<T>](#day8)是[Function<T,
-R>接口](#day7)的简化版本类似[参考day8](#day8)。BinaryOperator的所有输入输出都是同一个类型。具体接口定义如下：
+BinaryOperator<T>是BiFunction<T, U, V>函数的简化版本。与UnaryOperator<T>是Function<T,
+R>接口的简化版本类似（可参考day8），BinaryOperator的所有输入输出都是同一个类型。具体接口定义如下：
 ```
 @FunctionalInterface
 public interface BinaryOperator<T> extends BiFunction<T,T,T> {
