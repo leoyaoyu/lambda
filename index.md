@@ -16,6 +16,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day8 lambda默认接口UnaryOperator](#day8)
 * [Day9 lambda默认接口BiFunction](#day9)
 * [Day10 lambda默认接口BinaryOperator](#day10)
+* [Day11 lambda函数柯里化Currying](#day11)
 
 ---
 
@@ -340,3 +341,31 @@ log.info("BinaryOperator min:"+ min.apply(a,b).toString());
 [day10]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day10_BinaryOperator.java 
 "UnaryOperator interface"
 [day10完整例子][day10]
+
+***
+
+#### <a id="day11">Day11. lambda函数柯里化(Currying)</a>
+我们在Day5介绍了Function<T,R>，它是给1个输入返回一个输出，在Day9中介绍的BiFunction<T, U, 
+V>是给2个输入一个输出。如果是3个输入、4个输入、5个输入...N个输入呢？TriFunction? TetraFunction? PentaFunction? ...这么定义下去无穷尽了。函数的柯里化就是用来解决这个问题的。
+
+柯里化的数学表示是f(x,y,z) = f(x)f(y)f(z)。在此不做数学证明，直接使用这个结论。仅举例说明一下，例如想计算：f(x,y,z) = (x-y)*z
+假设x=6, y=5已经知道了，那f(x,y,z) = (x-y)*z就转化为 f(z) = (6 - 5) * z;
+同理，假设x=6, z=4已经知道了，那f(x,y,z) = (x-y)*z就转化为 f(y) = (6 - y) * 4;
+同理，假设y=5, z=4已经知道了，那f(x,y,z) = (x-y)*z就转化为 f(x) = (x - 5) * 4;
+
+柯里化后，我们可以把输入参数一个一个的传进去：f(x,y,z) = f(x(f(y(f(z)))))，因此f(x,y,z)用lambda表示就是Function<Integer,Function<Integer,
+Function<Integer,Integer>>>。
+
+计算f(x,y,z) = f(x) = (x - 5) * 4的代码例子如下：
+```
+Function<Integer,Function<Integer,Function<Integer,Integer>>> f =
+        z -> y -> x -> (x - y) * z;
+int x =6, y =5, z=4;
+Integer result = f.apply(z).apply(y).apply(x);
+log.info("result is {}", result.toString());
+```
+lambda的柯里化中需要特别注意apply的顺序：f(x(f(y(f(z)))))的顺序是从最里面的函数开始apply，因此是f.apply(z).apply(y).apply(x)。
+
+[day11]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day11_Currying.java 
+"currying"
+[day11完整例子][day11]
