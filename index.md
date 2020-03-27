@@ -6,7 +6,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 
 ## Lambda专题目录
 
-* [Day1 初亏lambda表达式](#day1)
+* [Day1 初窥lambda表达式](#day1)
 * [Day2 开发中需要重用方法吗？](#day2)
 * [Day3 默认的函数式接口](#day3)
 * [Day4 lambda默认接口Predicate](#day4)
@@ -24,7 +24,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 
 本专题的学习以小知识点为主，每篇内容尽量控制在3分钟之内。争取利用零碎时间片段看过就学会。作者也建议您详细阅读完整代码，或者自己动手实践每个知识点。
 
-#### <a id="day1">Day1. 初亏lambda表达式</a>
+#### <a id="day1">Day1. 初窥lambda表达式</a>
 
 漫天都是lambda表达式，它长啥样呢？来看一个lambda表达式的例子：
 ```
