@@ -387,14 +387,13 @@ public interface Iterable<T> {
 ```
 但Iterator就不是一个函数式接口，他提供多个方法，它就没法用函数式的方式调用这个接口。
 ```java
-
 public interface Iterator<E> {
     boolean hasNext();
     E next();
 }
 ```
 
-类似的，我们可以定义一个二元运算的接口如下：
+类似的，我们可以扩展一下day1的例子，来定义一个二元运算的接口如下：
 ```java
 @FunctionalInterface
 public interface Calculate<T> {
@@ -402,9 +401,10 @@ public interface Calculate<T> {
 }
 ```
 
-II. 其次，lambda的函数式接口和其他的Interface一样，JDK8后引入了default和static方法。
+II. 其次，JDK8后为接口引入了default和static方法，lambda的函数式接口也可以定义这两种方法。
 
-default方法用来实现一些与实例相关的扩展操作（注意区分面向对象中的"类"和"实例"）。例如：我们实现类似Function和BiFunction一样的andThen来接一个Function方法，可以这么实现：
+1). default方法用来实现一些与实例相关的扩展操作（注意区分面向对象中的"类"和"实例"）。例如：我们实现类似Function和BiFunction一样的andThen来让我们定义的Calculate<T>可以接一个Function
+方法，可以这么实现：
 ```
 default BinaryOperator<T> andThen
             (Function<? super T, ? extends T> after){
@@ -412,7 +412,7 @@ default BinaryOperator<T> andThen
     return (T x, T y) -> after.apply(algorithm(x, y));
 }
 ```
-类似的可以接一个Consumer<T>：
+default方法是可以重载的，类似的也可以用andThen接一个Consumer<T>：
 ```
 default BiConsumer<T, T> andThen(Consumer<? super T> after){
     Objects.requireNonNull(after);
@@ -426,14 +426,12 @@ default BiConsumer<T, T> andThen(Consumer<? super T> after){
 
 在函数式接口的设计中default方法非常实用，大大扩展了函数式接口的能力，如之前介绍的各种默认函数式接口中的compose/andThen。
 
-
-III. Static方法用来实现一些与类相关的操作，与具体实例无关(不可以调用this)。例如：
+2). Static方法用来实现一些与类相关的操作，与具体实例无关(不可以调用this)。例如：
 ```
 static Class<Calculate> getCalulateClass(){
     return Calculate.class;
 }
 ```
-
 [day12]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day12_SelfLambda.java 
 "self functional interface"
 [day12完整例子][day12]
