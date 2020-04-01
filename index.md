@@ -17,6 +17,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day9 lambda默认接口BiFunction](#day9)
 * [Day10 lambda默认接口BinaryOperator](#day10)
 * [Day11 lambda函数柯里化Currying](#day11)
+* [Day12 自定义lambda函数式接口](#day12)
 
 ---
 
@@ -369,3 +370,70 @@ lambda的柯里化中需要特别注意apply的顺序：f(x(f(y(f(z)))))的顺�
 [day11]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day11_Currying.java 
 "currying"
 [day11完整例子][day11]
+
+***
+
+#### <a id="day12">Day12. 自定义lambda函数式接口</a>
+看了这么多默认的函数式接口，我们该如何自定义一个自己的函数式接口呢？将详细介绍自动以的函数式接口。其中包括三个方面。
+* 只有一个接口方法；
+* 可以定义default方法；
+* 可以定义static方法；
+
+I. 首先，一个函数式接口只能有一个接口方法，并在类上使用@FunctionalInterface标签标注（@FunctionalInterface不是必须的，只是用于编译的时候做类型检查）。例如Iterable接口就只有一个方法。
+```java
+public interface Iterable<T> {
+  Iterator<T> iterator();
+}
+```
+但Iterator就不是一个函数式接口，他提供多个方法，它就没法用函数式的方式调用这个接口。
+```java
+
+public interface Iterator<E> {
+    boolean hasNext();
+    E next();
+}
+```
+
+类似的，我们可以定义一个二元运算的接口如下：
+```java
+@FunctionalInterface
+public interface Calculate<T> {
+    T algorithm(T x, T y);
+}
+```
+
+II. 其次，lambda的函数式接口和其他的Interface一样，JDK8后引入了default和static方法。
+
+default方法用来实现一些与实例相关的扩展操作（注意区分面向对象中的"类"和"实例"）。例如：我们实现类似Function和BiFunction一样的andThen来接一个Function方法，可以这么实现：
+```
+default BinaryOperator<T> andThen
+            (Function<? super T, ? extends T> after){
+    Objects.requireNonNull(after);
+    return (T x, T y) -> after.apply(algorithm(x, y));
+}
+```
+类似的可以接一个Consumer<T>：
+```
+default BiConsumer<T, T> andThen(Consumer<? super T> after){
+    Objects.requireNonNull(after);
+    return (T x, T y) -> {
+        T z = algorithm(x, y);
+        after.accept(z);
+    };
+}
+```
+注：以上两个方法，都直接使用了this.algorithm(x, y)，因此与类的实例有关，是对接口的扩展。
+
+在函数式接口的设计中default方法非常实用，大大扩展了函数式接口的能力，如之前介绍的各种默认函数式接口中的compose/andThen。
+
+
+III. Static方法用来实现一些与类相关的操作，与具体实例无关(不可以调用this)。例如：
+```
+static Class<Calculate> getCalulateClass(){
+    return Calculate.class;
+}
+```
+
+[day12]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day12_SelfLambda.java 
+"self functional interface"
+[day12完整例子][day12]

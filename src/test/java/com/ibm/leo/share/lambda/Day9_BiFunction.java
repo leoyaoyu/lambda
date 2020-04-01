@@ -13,7 +13,7 @@ public class Day9_BiFunction {
         Function<Double, String> area = (x) -> "area is " + x;
         BiFunction<Double, Double, Double> rectangle = (x, y) -> x * y;
         BiFunction<Double, Double, Double> triangle = (a, h) -> a * h / 2;
-        Function<Double, Double> cycle = (r) -> r * 3.14159265354;
+        Function<Double, Double> cycle = (r) -> r * Math.PI;
 
         log.info("rectangle {}", rectangle.andThen(area).apply(4.0, 5.0));
         log.info("triangle {}", triangle.andThen(area).apply(4.0, 5.0));
