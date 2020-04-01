@@ -375,9 +375,9 @@ lambda的柯里化中需要特别注意apply的顺序：f(x(f(y(f(z)))))的顺�
 
 #### <a id="day12">Day12. 自定义lambda函数式接口</a>
 看了这么多默认的函数式接口，我们该如何自定义一个自己的函数式接口呢？将详细介绍自动以的函数式接口。其中包括三个方面。
-* 只有一个接口方法；
-* 可以定义default方法；
-* 可以定义static方法；
+* 一个接口方法；
+* default方法；
+* static方法；
 
 I. 首先，一个函数式接口只能有一个接口方法，并在类上使用@FunctionalInterface标签标注（@FunctionalInterface不是必须的，只是用于编译的时候做类型检查）。例如Iterable接口就只有一个方法。
 ```java
