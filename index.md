@@ -376,8 +376,7 @@ lambda的柯里化中需要特别注意apply的顺序：f(x(f(y(f(z)))))的顺�
 #### <a id="day12">Day12. 自定义lambda函数式接口</a>
 看了这么多默认的函数式接口，我们该如何自定义一个自己的函数式接口呢？将详细介绍自动以的函数式接口。其中包括三个方面。
 * 一个接口方法；
-* default方法；
-* static方法；
+* default方法 & static方法；
 
 I. 首先，一个函数式接口只能有一个接口方法，并在类上使用@FunctionalInterface标签标注（@FunctionalInterface不是必须的，只是用于编译的时候做类型检查）。例如Iterable接口就只有一个方法。
 ```java
@@ -401,10 +400,11 @@ public interface Calculate<T> {
 }
 ```
 
-II. 其次，JDK8后为接口引入了default和static方法，lambda的函数式接口也可以定义这两种方法。
+II. 其次，JDK8后为接口引入了default和static方法，这两种方法在lambda的函数式接口设计中非常实用，大大扩展了函数式接口的能力，如之前介绍的各种默认函数式接口中的default方法：compose/andThen等，
+还有static方法maxBy/minBy等。
 
-1). default方法用来实现一些与实例相关的扩展操作（注意区分面向对象中的"类"和"实例"）。例如：我们实现类似Function和BiFunction一样的andThen来让我们定义的Calculate<T>可以接一个Function
-方法，可以这么实现：
+
+1). default方法。它用来实现一些与实例相关的扩展操作（注意区分面向对象中的"类"和"实例"）。例如：我们实现类似Function和BiFunction一样的andThen来让我们定义的Calculate<T>可以接一个Function方法，可以这么实现：
 ```
 default BinaryOperator<T> andThen
             (Function<? super T, ? extends T> after){
@@ -424,7 +424,6 @@ default BiConsumer<T, T> andThen(Consumer<? super T> after){
 ```
 注：以上两个方法，都直接使用了this.algorithm(x, y)，因此与类的实例有关，是对接口的扩展。
 
-在函数式接口的设计中default方法非常实用，大大扩展了函数式接口的能力，如之前介绍的各种默认函数式接口中的compose/andThen。
 
 2). Static方法用来实现一些与类相关的操作，与具体实例无关(不可以调用this)。例如：
 ```
