@@ -400,9 +400,8 @@ public interface Calculate<T> {
 }
 ```
 
-II. 其次，JDK8后为接口引入了default和static方法，这两种方法在lambda的函数式接口设计中非常实用，大大扩展了函数式接口的能力，如之前介绍的各种默认函数式接口中的default方法：compose/andThen等，
-还有static方法maxBy/minBy等。
-
+II. 其次，JDK8开始为接口引入了default和static方法，这两种方法在lambda的函数式接口设计中非常实用，大大扩展了函数式接口的能力，如之前介绍的几个默认函数式接口中的default方法compose/andThen，
+还有static方法maxBy/minBy。
 
 1). default方法。它用来实现一些与实例相关的扩展操作（注意区分面向对象中的"类"和"实例"）。例如：我们实现类似Function和BiFunction一样的andThen来让我们定义的Calculate<T>可以接一个Function方法，可以这么实现：
 ```
@@ -425,7 +424,7 @@ default BiConsumer<T, T> andThen(Consumer<? super T> after){
 注：以上两个方法，都直接使用了this.algorithm(x, y)，因此与类的实例有关，是对接口的扩展。
 
 
-2). Static方法用来实现一些与类相关的操作，与具体实例无关(不可以调用this)。例如：
+2). Static方法用来实现一些与"类"相关的操作，与具体实例无关(不可以调用this)。例如：
 ```
 static Class<Calculate> getCalulateClass(){
     return Calculate.class;
