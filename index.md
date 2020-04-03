@@ -468,7 +468,8 @@ class Dog{
 }
 ```
 
-I. 构造方法的方法引用。
+I. 构造方法的方法引用
+
 我们可以直接使用lambda默认的函数式接口来为类中的构造方法创建函数式的方法引用，如下：
 ```java
 Supplier<Dog> dogSupplier1 = Dog::new;
@@ -481,6 +482,7 @@ log.info("supplier3 built : {}", dogSupplier3.apply("Goofy", 9));
 ```
 
 II. 一般方法的方法引用
+
 也可以为类中一般方法创造函数式的方法引用，如下，
 ```java
 Dog goofy = new Dog("Goofy");
