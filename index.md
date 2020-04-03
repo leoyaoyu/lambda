@@ -18,6 +18,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day10 lambda默认接口BinaryOperator](#day10)
 * [Day11 lambda函数柯里化Currying](#day11)
 * [Day12 自定义lambda函数式接口](#day12)
+* [Day13 lambda函数的方法应用](#day13)
 
 ---
 
@@ -433,3 +434,68 @@ static Class<Calculate> getCalulateClass(){
 [day12]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day12_SelfLambda.java 
 "self functional interface"
 [day12完整例子][day12]
+
+
+***
+
+#### <a id="day13">Day13. lambda函数的方法应用</a>
+昨天介绍了如何自定义lambda函数，本节将介绍如何使用lambda函数。除了day1里介绍的最简单的使用方法，还可以用方法引用的方式使用lambda函数式。方法引用在各种设计模式和Stream
+中极为常见。本节分两类介绍方法引用，一类是构造方法的方法引用，一类是一般方法的方法引用。本节建议[结合实例][day13]阅读。以下举例说明。先给一个自定义的Dog类。
+
+```java
+@Data
+@ToString
+class Dog{
+    private String name;
+    private Integer age;
+
+    public Dog(){}
+
+    public Dog(String name){this.name = name;}
+
+    public Dog(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void bark(){
+        log.info("{} is barking!", this.name);
+    }
+
+    public void eat(String food) {
+        log.info("{} is eating {}", this.name, food);
+    }
+}
+```
+
+I. 构造方法的方法引用。
+我们可以直接使用lambda默认的函数式接口来给为类中的创建构造方法创建函数式方法，如下：
+```
+Supplier<Dog> dogSupplier1 = Dog::new;
+Function<String, Dog> dogSupplier2 = Dog::new;
+BiFunction<String, Integer, Dog> dogSupplier3 = Dog::new;
+
+log.info("supplier1 built : {}", dogSupplier1.get());
+log.info("supplier2 built : {}", dogSupplier2.apply("Goofy"));
+log.info("supplier3 built : {}", dogSupplier3.apply("Goofy", 9));
+```
+
+II. 一般方法的方法引用
+也可以为类中的一般方法创造函数式方法，如下，
+```
+Dog goofy = new Dog("Goofy");
+Consumer<Dog> consumer = Dog::bark;
+consumer.accept(goofy);
+
+Consumer<String> eatConsumer = goofy::eat;
+eatConsumer.accept("bone1");
+
+BiConsumer<Dog, String> biConsumer = Dog::eat;
+biConsumer.accept(goofy, "bone2");
+```
+
+[day13]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day13_FunctionReference.java 
+"FunctionReference"
+[day13完整例子][day13]
+
+***
