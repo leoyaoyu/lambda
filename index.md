@@ -49,7 +49,7 @@ Calculate addition0 = new Calculate() {
 ```
 
 
-[day1]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day1_basic.java "basic"
+[day1]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day1_basic.java "basic"
 [day1完整例子][day1]
 
 ***
@@ -77,7 +77,7 @@ lambda之后，代码变得更简单清晰了：
 Comparator<Integer> increase = (o1, o2) -> o1 - o2;
 ```
 
-[day2]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day2_compare.java "compare"
+[day2]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day2_compare.java "compare"
 [day2完整例子][day2]
 
 ***
@@ -92,7 +92,7 @@ Comparator<Integer> increase = (o1, o2) -> o1 - o2;
 
 这样的2个接口在函数式中可以用Supplier<T>来表示。以上只是列举了一元的几个，后面会一个一个介绍。并引入二元、和柯里化等概念。
 
-[day3]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day3_Default_Lambda_Functional_Interface.java "default lambda interface"
+[day3]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day3_Default_Lambda_Functional_Interface.java "default lambda interface"
 [day3完整例子][day3]
 
 ***
@@ -121,7 +121,7 @@ if(p1.negate().and(p2).and(p3.or(p4)).test(input)){
 }
 ```
 
-[day4]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day4_Predicate.java "Predicate interface"
+[day4]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day4_Predicate.java "Predicate interface"
 [day4完整例子][day4]
 
 ***
@@ -154,7 +154,7 @@ String result = threadName.apply(6);
 使用Function的这两个方法就是：g.compose(f).apply(x)或者f.andThen(g).apply(x)。
 
 
-[day5]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day5_Function.java 
+[day5]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day5_Function.java 
 "Function interface"
 [day5完整例子][day5]
 
@@ -203,7 +203,7 @@ Consumer<Exception> exceptionLog = (ex2) ->
 exceptionLog.andThen(detailedExceptionLog).accept(ex);
 ```
 
-[day6]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day6_Consumer.java 
+[day6]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day6_Consumer.java 
 "Function interface"
 [day6完整例子][day6]
 
@@ -233,7 +233,7 @@ log.info("calculated result is : {}", doubleSupplier.get());
 ```
 代码中Stream的部分不必看懂，可以简单理解为用数值的map/reduce模拟了一个复杂计算。实际的计算可能比这个复杂N倍。但我们只在真的需要这个计算结果的时候才去调用supplier方法以获得结果。
 
-[day7]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day7_Supplier.java 
+[day7]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day7_Supplier.java 
 "Suppiler interface"
 [day7完整例子][day7]
 
@@ -258,7 +258,7 @@ threadName1与threadName2实现的是同样的功能，threadName2比threadName1
 
 *UnaryOperator和Function都有一个static identity方法，暂时不用细扣，这个会留到后面做介绍。static会在自定义函数式接口中做介绍，identity方法会留到Stream收集器中做介绍。
 
-[day8]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day8_UnaryOperator.java 
+[day8]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day8_UnaryOperator.java 
 "UnaryOperator interface"
 [day8完整例子][day8]
 
@@ -301,7 +301,7 @@ cycle.andThen(area).apply(4.0);
 
 ```
 
-[day9]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day9_BiFunction.java 
+[day9]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day9_BiFunction.java 
 "Function interface"
 [day9完整例子][day9]
 
@@ -340,7 +340,7 @@ log.info("BinaryOperator min:"+ min.apply(a,b).toString());
 ```
 上面的例子按照从大到小的顺序排列，所以maxBy反而输出的是小的值，minBy输出的是大值。这两个default方法在后面Stream中做元素的提取时能起到很大的作用。
 
-[day10]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day10_BinaryOperator.java 
+[day10]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day10_BinaryOperator.java 
 "UnaryOperator interface"
 [day10完整例子][day10]
 
@@ -368,7 +368,7 @@ log.info("result is {}", result.toString());
 ```
 lambda的柯里化中需要特别注意apply的顺序：f(x(f(y(f(z)))))的顺序是从最里面的函数开始apply，因此是f.apply(z).apply(y).apply(x)。
 
-[day11]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day11_Currying.java 
+[day11]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day11_Currying.java 
 "currying"
 [day11完整例子][day11]
 
@@ -431,7 +431,7 @@ static Class<Calculate> getCalulateClass(){
     return Calculate.class;
 }
 ```
-[day12]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day12_SelfLambda.java 
+[day12]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day12_SelfLambda.java 
 "self functional interface"
 [day12完整例子][day12]
 
@@ -494,7 +494,7 @@ BiConsumer<Dog, String> biConsumer = Dog::eat;
 biConsumer.accept(goofy, "bone2");
 ```
 
-[day13]: https://github.com/wzdacyl/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day13_FunctionReference.java 
+[day13]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day13_FunctionReference.java
 "FunctionReference"
 [day13完整例子][day13]
 
