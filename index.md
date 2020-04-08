@@ -565,7 +565,7 @@ public class Factory2LambdaImpl implements Factory {
 }
 ```
 
-[day14]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com.ibm.leo.share.lambda.Day14_factory
+[day14]: https://github.com/leoyaoyu/lambda/tree/master/src/test/java/com/ibm/leo/share/lambda/Day14_factory
 "lambda in factory design pattern"
 [day14完整例子][day14]
 
