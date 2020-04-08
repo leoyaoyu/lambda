@@ -19,6 +19,7 @@ Lambda是从Java8引入的重要的特性。lambda函数式编程提供了方法
 * [Day11 lambda函数柯里化Currying](#day11)
 * [Day12 自定义lambda函数式接口](#day12)
 * [Day13 lambda函数的方法引用](#day13)
+* [Day14 lambda与设计模式：工厂模式](#day14)
 
 ---
 
@@ -499,5 +500,73 @@ biConsumer.accept(goofy, "bone2");
 [day13]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com/ibm/leo/share/lambda/Day13_FunctionReference.java
 "FunctionReference"
 [day13完整例子][day13]
+
+***
+
+#### <a id="day14">Day14. lambda与设计模式：工厂模式</a>
+
+从今天开始介绍lambda对几种常用的设计模式的影响，可以把后面几节当做lambda在设计模式中的应用。
+
+(注：
+* 后面几节需要一定的设计模式的基础知识。
+* 后面几节介绍了lambda的引入，lambda并不一定简化了设计模式的写法。
+* 设计模式最重要的还是他们本身的思想而不是写法，引入这个模块一方面体现一些lambda之后的写法变化，一方面借机会复习一下设计模式。
+)
+
+######## 工厂模式：把对象的创建抽象到一个工厂类中实现。
+
+######## 使用场景：
+1.工厂模式在创建使用类的时候有大量的if/else分支做判断创建不同的对象，而且可能增加或者修改这些对象的创建方法时，考虑将这一大坨if/else抽取出来放到工厂中实现。
+2.当对象的创建过程比较复杂的时候（例如：需要组合其他类，需要初始化操作）。在创建对象时建议封装到工厂类中。
+
+######## 实现方法：
+1. 简单工厂
+2. 工厂方法
+3. 抽象工厂
+
+我们以最常用的简单工厂为例进行lambda扩展。举一个实际的例子，之前在做电信系统的时候，有一个场景是需要把不同厂商的网元信息采集并汇总到统一的监控系统中，从而监控网元是否工作正常。虽然各家厂商都遵循NGOSS
+的规范，但是各家厂商的网元信息格式是不同的。我们需要抽取出一个统一的格式进行存储。因此需要对各家厂商做一个转化器(Convertor)来转化网元信息为统一格式。主流厂商有Huawei、Ericsson、Alcatel-Lucent、ZTE、Nokia，也就对应有5个convertor。可能还有更多，如三星。
+
+lambda前
+
+```java
+public class Factory1NormalImpl implements Factory {
+
+    @Override
+    public Convertor generateConvertor(ConvertorType type) {
+        switch (type) {
+            case HUAWEI: return new HUAWEIConvertor();
+            case ZHONGXING: return new ZTEConvertor();
+            case NOKIA: return new NokiaConvertor();
+            case ALCATELLUCENT: return new ALUConvertor();
+            case ERICSSON: return new EricssonConvertor();
+            default: return null;
+        }
+    }
+}
+```
+
+lambda后
+```java
+public class Factory2LambdaImpl implements Factory {
+    final static Map<ConvertorType,Supplier<Convertor>> map = new ConcurrentHashMap<>();
+
+    static{
+        map.put(ConvertorType.HUAWEI, HUAWEIConvertor::new);
+        map.put(ConvertorType.ZHONGXING, ZTEConvertor::new);
+        map.put(ConvertorType.ALCATELLUCENT, ALUConvertor::new);
+        map.put(ConvertorType.ERICSSON, EricssonConvertor::new);
+        map.put(ConvertorType.NOKIA, NokiaConvertor::new);
+    }
+
+    public Convertor generateConvertor(ConvertorType type){
+        return this.map.get(type).get();
+    }
+}
+```
+
+[day14]: https://github.com/leoyaoyu/lambda/blob/master/src/test/java/com.ibm.leo.share.lambda.Day14_factory
+"lambda in factory design pattern"
+[day14完整例子][day14]
 
 ***
