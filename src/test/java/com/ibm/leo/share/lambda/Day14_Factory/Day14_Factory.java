@@ -1,6 +1,6 @@
-package com.ibm.leo.share.lambda.Day14_factory;
+package com.ibm.leo.share.lambda.Day14_Factory;
 
-import com.ibm.leo.share.lambda.Day14_factory.impl.*;
+import com.ibm.leo.share.lambda.Day14_Factory.impl.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 

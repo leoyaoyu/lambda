@@ -1,8 +1,8 @@
-package com.ibm.leo.share.lambda.Day14_factory.impl;
+package com.ibm.leo.share.lambda.Day14_Factory.impl;
 
-import com.ibm.leo.share.lambda.Day14_factory.Convertor;
-import com.ibm.leo.share.lambda.Day14_factory.ConvertorType;
-import com.ibm.leo.share.lambda.Day14_factory.Factory;
+import com.ibm.leo.share.lambda.Day14_Factory.Convertor;
+import com.ibm.leo.share.lambda.Day14_Factory.ConvertorType;
+import com.ibm.leo.share.lambda.Day14_Factory.Factory;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
